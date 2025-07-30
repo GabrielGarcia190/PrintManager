@@ -2,9 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["ProjetoTeste.csproj", "ProjetoTeste/"]
-RUN dotnet restore "ProjetoTeste.csproj"
+RUN dotnet restore ".\ProjetoTeste.csproj"
 COPY . .
-RUN dotnet publish "rojetoTeste.csproj" -c Release -o /app/publish
+RUN dotnet publish ".\ProjetoTeste.csproj" -c Release -o /app/publish
 
 # Estágio de runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
