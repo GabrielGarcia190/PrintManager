@@ -1,6 +1,9 @@
+
+
 # Application ignore files
 Optima.API/bin
 Optima.API/obj
+Optima.API/.env
 
 # Application ignore files
 Optima.Application/bin
@@ -17,3 +20,4 @@ Optima.Infrastructure/obj
 # Domain Infrastructure.Ioc files
 Optima.Infrastructure.Ioc/bin
 Optima.Infrastructure.Ioc/obj
+
