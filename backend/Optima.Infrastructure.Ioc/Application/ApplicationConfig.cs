@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-using Optima.Application.Clients.Interfaces;
-using Optima.Application.Clients.Services;
+using Optima.Application.Users.Interfaces;
+using Optima.Application.Users.Services;
 
 namespace Optima.Infrastructure.Ioc.Application;
 

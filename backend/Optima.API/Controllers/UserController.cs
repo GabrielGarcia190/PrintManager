@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Optima.Application.Clients.Interfaces;
+using Optima.API.Models.Requests;
+using Optima.API.Models.Requests.Filters;
+using Optima.Application.Users.Commands;
+using Optima.Application.Users.Interfaces;
 
 namespace Optima.API.Controllers;
 
@@ -8,17 +11,33 @@ namespace Optima.API.Controllers;
 public class UserController : ControllerBase
 {
     [HttpPost]
-    public IActionResult Post([FromBody] UserDto user, [FromServices] IUserService service)
+    public IActionResult Post([FromBody] CreateUserRequest userRequest, [FromServices] IUserService service)
     {
-        service.AddUser("John Doe", "test");
+        var command = new CreateUserCommand
+        {
+            Name = userRequest.Name,
+            Email = userRequest.Email
+        };
 
-        return Created("User added successfully", null);
+        service.AddUser(command);
+
+        return Ok(new { Message = "User added successfully" });
     }
-}
-public class UserDto
-{
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public int Age { get; set; }
-    public bool IsActive { get; set; }
+
+    [HttpGet("{id:guid}")]
+    public IActionResult Get(Guid id, [FromServices] IUserService service)
+    {
+        var user = service.GetById(id);
+
+        return Ok(user);
+    }
+
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult Delete(Guid id, [FromServices] IUserService service)
+    {
+        service.Delete(id);
+        
+        return Ok(new { Message = "User deleted successfully" });
+    }
 }

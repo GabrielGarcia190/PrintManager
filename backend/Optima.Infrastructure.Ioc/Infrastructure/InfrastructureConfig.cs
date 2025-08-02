@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Optima.Domain.DataAcess;
 using Optima.Domain.Users.Repositories;
-using Optima.Infrastructure.Clients.Repositories;
 using Optima.Infrastructure.DataAcess;
+using Optima.Infrastructure.Users.Repositories;
 
 namespace Optima.Infrastructure.Ioc.Infrastructure;
 
@@ -16,7 +17,10 @@ internal static class InfrastructureConfig
     }
 
     private static void AddRepositories(IServiceCollection services)
-     => services.AddScoped<IUserRepository, UserRepository>();
+    {
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUnitOFWork, UnitOfWork>();
+    }
 
     private static void AddDbContext(IServiceCollection services)
     {

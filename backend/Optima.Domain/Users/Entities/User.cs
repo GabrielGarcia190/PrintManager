@@ -5,7 +5,7 @@ namespace Optima.Domain.Users.Entities
         public User(string name, string email)
         {
             Name = string.IsNullOrEmpty(name) ? throw new ArgumentException("Nome não pode ser vazio", nameof(name)) : name;
-            Email = string.IsNullOrEmpty(email) ? throw new ArgumentException("Email não pode ser vazio", nameof(name)) : name; ;
+            Email = string.IsNullOrEmpty(email) ? throw new ArgumentException("Email não pode ser vazio", nameof(email)) : email; ;
         }
 
         public Guid Id { get; set; }
