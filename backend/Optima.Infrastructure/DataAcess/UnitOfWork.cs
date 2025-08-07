@@ -11,6 +11,5 @@ namespace Optima.Infrastructure.DataAcess
 
         public void Commit()
          => _dbContext.SaveChanges();
-       
     }
 }

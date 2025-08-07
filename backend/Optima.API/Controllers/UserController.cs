@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Optima.API.Models.Requests;
-using Optima.API.Models.Requests.Filters;
 using Optima.Application.Users.Commands;
 using Optima.Application.Users.Interfaces;
 
@@ -11,6 +10,7 @@ namespace Optima.API.Controllers;
 public class UserController : ControllerBase
 {
     [HttpPost]
+    [ProducesResponseType(200)]
     public IActionResult Post([FromBody] CreateUserRequest userRequest, [FromServices] IUserService service)
     {
         var command = new CreateUserCommand
@@ -31,7 +31,6 @@ public class UserController : ControllerBase
 
         return Ok(user);
     }
-
 
     [HttpDelete("{id:guid}")]
     public IActionResult Delete(Guid id, [FromServices] IUserService service)

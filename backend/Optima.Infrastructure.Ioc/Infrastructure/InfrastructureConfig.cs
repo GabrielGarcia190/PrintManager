@@ -28,11 +28,12 @@ internal static class InfrastructureConfig
         {
             var config = serviceProvider.GetRequiredService<IConfiguration>();
 
-            var connectionString = config.GetConnectionString("SqlServer");
+            var connectionString = config.GetConnectionString("PostgreSQL");
+
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new InvalidOperationException("Connection string 'SqlServer' não encontrada. Verifique o .env ou variáveis de ambiente.");
 
-            options.UseSqlServer(connectionString);
+            options.UseNpgsql(connectionString);
         });
     }
 }
