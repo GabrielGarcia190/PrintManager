@@ -6,12 +6,10 @@ namespace Optima.Domain.Orders.Entities;
 
 public class Order
 {
-    public Order(Guid clienteId, decimal totalOrder)
+    public Order(Guid userId, decimal totalOrder)
     {
-        UserId = UserId == Guid.Empty ? throw new ArgumentException("ClienteId não pode ser vazio", nameof(clienteId)) : clienteId;
-        TotalOrder = totalOrder == decimal.Zero ? throw new ArgumentNullException(nameof(totalOrder), "Usuário não pode ser nulo") : totalOrder;
-        ArgumentNullException.ThrowIfNull(clienteId, nameof(clienteId));
-        
+        UserId = userId == Guid.Empty ? throw new ArgumentException("UserId não pode ser vazio", nameof(userId)) : userId;
+        TotalOrder = totalOrder == decimal.Zero ? throw new ArgumentException("TotalOrder não pode ser zero", nameof(totalOrder)) : totalOrder;
     }
 
     [Key]

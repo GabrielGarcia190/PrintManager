@@ -24,11 +24,13 @@ internal static class InfrastructureConfig
 
     private static void AddDbContext(IServiceCollection services)
     {
+        DotNetEnv.Env.Load();
+
         services.AddDbContext<OptimaDbContext>((serviceProvider, options) =>
         {
             var config = serviceProvider.GetRequiredService<IConfiguration>();
 
-            var connectionString = config.GetConnectionString("PostgreSQL");
+            var connectionString = config.GetConnectionString("ConnectionStrings__PostgreSQL");
 
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new InvalidOperationException("Connection string 'SqlServer' não encontrada. Verifique o .env ou variáveis de ambiente.");
