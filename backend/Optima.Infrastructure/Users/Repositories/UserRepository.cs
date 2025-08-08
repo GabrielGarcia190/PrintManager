@@ -29,4 +29,7 @@ public class UserRepository : IUserRepository
     {
         return _dbContext.Users.First(x => x.Id == id);
     }
+
+    public IEnumerable<User> GetAll()
+        => _dbContext.Users.ToList( );
 }

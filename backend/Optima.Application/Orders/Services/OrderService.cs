@@ -1,15 +1,20 @@
+using Optima.Application.Orders.Commands;
+using Optima.Application.Orders.Interfaces;
 using Optima.Domain.Orders.Entities;
+using Optima.Domain.Orders.Repositories;
 
 namespace Optima.Application.Orders.Services;
 
-public class OrderService
+public class OrderService : IOrderService
 {
-    public void AddOrder(Order order)
-    {
-        if (order == null)
-            throw new ArgumentNullException(nameof(order));
+    private readonly IOrderRepository _orderRepository;
 
+    public OrderService(IOrderRepository orderRepository)
+        => _orderRepository = orderRepository;
 
-        Console.WriteLine($"Pedido criado para o cliente: {order.UserId}, valor: {order.TotalOrder}");
-    }
+    public void AddOrder(CreateOrderCommand order)
+        => _orderRepository.Add(new Order(order.UserId, order.TotalOrder));
+
+    public IEnumerable<Order> GetAll()
+        => _orderRepository.GetAll();
 }

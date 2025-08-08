@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Optima.API.Models.Requests;
+using Optima.Application.Orders.Commands;
 using Optima.Application.Orders.Interfaces;
-using Optima.Domain.Orders.Entities;
-
 namespace Optima.API.Controllers;
 
 [Route("api/[controller]")]
@@ -13,10 +12,21 @@ public class OrderController : ControllerBase
     [ProducesResponseType(200)]
     public IActionResult Post([FromBody] CreteOrderRequest userRequest, [FromServices] IOrderService service)
     {
-        var order = new Order(userRequest.UserId, userRequest.TotalOrder);
 
-        service.AddOrder(order);
+        var command = new CreateOrderCommand(userRequest.UserId, userRequest.TotalOrder);
+
+        service.AddOrder(command);
 
         return Ok(new { Message = "User added successfully" });
+    }
+
+    [HttpGet]
+    [ProducesResponseType(200)]
+    public IActionResult GetAll([FromServices] IOrderService service)
+    {
+
+        var orders = service.GetAll();
+
+        return Ok(orders);
     }
 }

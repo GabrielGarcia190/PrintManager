@@ -32,6 +32,14 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
+    [HttpGet]
+    public IActionResult GetAll([FromServices] IUserService service)
+    {
+        var user = service.GetAll();
+
+        return Ok(user);
+    }
+
     [HttpDelete("{id:guid}")]
     public IActionResult Delete(Guid id, [FromServices] IUserService service)
     {

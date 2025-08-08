@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Optima.Domain.DataAcess;
+using Optima.Domain.Orders.Repositories;
 using Optima.Domain.Users.Repositories;
 using Optima.Infrastructure.DataAcess;
+using Optima.Infrastructure.Orders.Repositories;
 using Optima.Infrastructure.Users.Repositories;
 
 namespace Optima.Infrastructure.Ioc.Infrastructure;
@@ -20,17 +22,16 @@ internal static class InfrastructureConfig
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOFWork, UnitOfWork>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services)
     {
-        DotNetEnv.Env.Load();
-
         services.AddDbContext<OptimaDbContext>((serviceProvider, options) =>
         {
             var config = serviceProvider.GetRequiredService<IConfiguration>();
 
-            var connectionString = config.GetConnectionString("ConnectionStrings__PostgreSQL");
+            var connectionString = config.GetConnectionString("PostgreSQL");
 
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new InvalidOperationException("Connection string 'SqlServer' não encontrada. Verifique o .env ou variáveis de ambiente.");
