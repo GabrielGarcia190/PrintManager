@@ -1,5 +1,6 @@
 using Optima.Application.Orders.Commands;
 using Optima.Application.Orders.Interfaces;
+using Optima.Domain.DataAccess;
 using Optima.Domain.Orders.Entities;
 using Optima.Domain.Orders.Repositories;
 
@@ -8,13 +9,21 @@ namespace Optima.Application.Orders.Services;
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public OrderService(IOrderRepository orderRepository)
-        => _orderRepository = orderRepository;
+    public OrderService(IOrderRepository orderRepository, IUnitOfWork unitOfWork)
+    {
+        _orderRepository = orderRepository;
+        _unitOfWork = unitOfWork;
+    }
 
-    public void AddOrder(CreateOrderCommand order)
-        => _orderRepository.Add(new Order(order.UserId, order.TotalOrder));
+    public async Task AddOrderAsync(CreateOrderCommand order)
+    {
+        var orderEntity = new Order(order.UserId, order.TotalOrder);
+        await _orderRepository.AddAsync(orderEntity);
+        await _unitOfWork.CommitAsync();
+    }
 
-    public IEnumerable<Order> GetAll()
-        => _orderRepository.GetAll();
+    public async Task<IEnumerable<Order>> GetAllAsync()
+        => await _orderRepository.GetAllAsync();
 }

@@ -11,40 +11,80 @@ public class UserController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(200)]
-    public IActionResult Post([FromBody] CreateUserRequest userRequest, [FromServices] IUserService service)
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Post([FromBody] CreateUserRequest userRequest, [FromServices] IUserService service)
     {
-        var command = new CreateUserCommand
+        try
         {
-            Name = userRequest.Name,
-            Email = userRequest.Email
-        };
+            var command = new CreateUserCommand
+            {
+                Name = userRequest.Name,
+                Email = userRequest.Email
+            };
 
-        service.AddUser(command);
+            var user = await service.AddUserAsync(command);
 
-        return Ok(new { Message = "User added successfully" });
+            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult Get(Guid id, [FromServices] IUserService service)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    public async Task<IActionResult> Get(Guid id, [FromServices] IUserService service)
     {
-        var user = service.GetById(id);
+        var user = await service.GetByIdAsync(id);
+
+        if (user == null)
+            return NotFound(new { Message = "Usuário não encontrado" });
 
         return Ok(user);
     }
 
     [HttpGet]
-    public IActionResult GetAll([FromServices] IUserService service)
+    [ProducesResponseType(200)]
+    public async Task<IActionResult> GetAll(
+         [FromServices] IUserService service,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
     {
-        var user = service.GetAll();
+        var users = await service.GetAllAsync(page, pageSize);
+        var totalCount = await service.GetTotalCountAsync();
 
-        return Ok(user);
+        return Ok(new
+        {
+            Data = users,
+            Pagination = new
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+            }
+        });
     }
 
     [HttpDelete("{id:guid}")]
-    public IActionResult Delete(Guid id, [FromServices] IUserService service)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    public async Task<IActionResult> Delete(Guid id, [FromServices] IUserService service)
     {
-        service.Delete(id);
-        
-        return Ok(new { Message = "User deleted successfully" });
+        try
+        {
+            await service.DeleteAsync(id);
+            return Ok(new { Message = "Usuário deletado com sucesso" });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return NotFound(new { Message = ex.Message });
+        }
     }
 }

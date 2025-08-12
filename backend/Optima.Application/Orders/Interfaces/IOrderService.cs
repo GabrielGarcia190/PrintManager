@@ -5,6 +5,6 @@ namespace Optima.Application.Orders.Interfaces;
 
 public interface IOrderService
 {
-    void AddOrder(CreateOrderCommand command);
-    IEnumerable<Order> GetAll();
+    Task AddOrderAsync(CreateOrderCommand command);
+    Task<IEnumerable<Order>> GetAllAsync();
 }

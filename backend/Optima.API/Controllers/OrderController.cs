@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Optima.API.Models.Requests;
 using Optima.Application.Orders.Commands;
 using Optima.Application.Orders.Interfaces;
+
 namespace Optima.API.Controllers;
 
 [Route("api/[controller]")]
@@ -10,23 +11,27 @@ public class OrderController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(200)]
-    public IActionResult Post([FromBody] CreteOrderRequest userRequest, [FromServices] IOrderService service)
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Post([FromBody] CreateOrderRequest orderRequest, [FromServices] IOrderService service)
     {
+        try
+        {
+            var command = new CreateOrderCommand(orderRequest.UserId, orderRequest.TotalOrder);
+            await service.AddOrderAsync(command);
 
-        var command = new CreateOrderCommand(userRequest.UserId, userRequest.TotalOrder);
-
-        service.AddOrder(command);
-
-        return Ok(new { Message = "User added successfully" });
+            return Ok(new { Message = "Pedido criado com sucesso" });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
     }
 
     [HttpGet]
     [ProducesResponseType(200)]
-    public IActionResult GetAll([FromServices] IOrderService service)
+    public async Task<IActionResult> GetAll([FromServices] IOrderService service)
     {
-
-        var orders = service.GetAll();
-
+        var orders = await service.GetAllAsync();
         return Ok(orders);
     }
 }

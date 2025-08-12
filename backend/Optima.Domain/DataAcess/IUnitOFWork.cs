@@ -1,6 +1,7 @@
-namespace Optima.Domain.DataAcess;
+namespace Optima.Domain.DataAccess;
 
-public interface IUnitOFWork
+public interface IUnitOfWork
 {
+    Task<int> CommitAsync();
     void Commit();
 }

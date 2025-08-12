@@ -4,6 +4,6 @@ namespace Optima.Domain.Orders.Repositories;
 
 public interface IOrderRepository
 {
-    void Add(Order order);
-    IEnumerable<Order> GetAll();
+    Task<Order> AddAsync(Order order);
+    Task<IEnumerable<Order>> GetAllAsync();
 }

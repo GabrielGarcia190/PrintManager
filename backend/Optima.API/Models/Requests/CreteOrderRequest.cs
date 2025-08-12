@@ -1,6 +1,6 @@
 namespace Optima.API.Models.Requests;
 
-public class CreteOrderRequest
+public class CreateOrderRequest
 {
     public Guid UserId { get; set; }
     public decimal TotalOrder { get; set; }

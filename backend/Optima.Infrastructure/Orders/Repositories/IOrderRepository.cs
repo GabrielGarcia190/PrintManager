@@ -12,12 +12,12 @@ public class OrderRepository : IOrderRepository
     public OrderRepository(OptimaDbContext context)
         => _context = context;
 
-    public void Add(Order order)
+    public async Task<Order> AddAsync(Order order)
     {
-        _context.Orders.Add(order);
-        _context.SaveChanges();
+        await _context.Orders.AddAsync(order);
+        return order;
     }
 
-    public IEnumerable<Order> GetAll()
-        => _context.Orders.Include(x => x.Users).ToList();
+    public async Task<IEnumerable<Order>> GetAllAsync()
+        => await _context.Orders.Include(x => x.Users).ToListAsync();
 }
