@@ -64,3 +64,4 @@ Thumbs.db
 .env.*
 appsettings.Development.json
 appsettings.json
+config.ts

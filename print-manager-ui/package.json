@@ -1,0 +1,36 @@
+{
+  "name": "print-manager-ui",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.ts",
+  "scripts": {
+    "dev:next": "next dev",
+    "build:next": "next build",
+    "start:next": "next start",
+    "start:electron": "electron -r ts-node/register electron/main.ts",
+    "dev": "concurrently \"npm run dev:next\" \"npm run start:electron\""
+  },
+  "dependencies": {
+    "firebase": "^12.3.0",
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/electron": "^1.4.38",
+    "@types/node": "^20.19.17",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
+    "electron": "^38.1.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "wait-on": "^9.0.1"
+  }
+}

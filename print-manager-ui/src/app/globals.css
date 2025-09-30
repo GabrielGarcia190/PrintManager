@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background-light: #f6f7f8;
+  --background-dark: #101c22;
+  --foreground-light: #111827;
+  --foreground-dark: #f9fafb;
+  --subtle-light: #6b7280;
+  --subtle-dark: #9ca3af;
+  --border-light: #e5e7eb;
+  --border-dark: #374151;
+  --primary: #13a4ec;
+  --success-light: #10b981;
+  --success-dark: #34d399;
+  --warning-light: #f59e0b;
+  --warning-dark: #fbbf24;
+  --info-light: #3b82f6;
+  --info-dark: #60a5fa;
+  --danger-light: #ef4444;
+  --danger-dark: #f87171;
+  
+  --font-family: "Inter", sans-serif;
+}
+
+@theme inline {
+  /* Cores para modo claro/escuro */
+  --color-background-light: var(--background-light);
+  --color-background-dark: var(--background-dark);
+  --color-foreground-light: var(--foreground-light);
+  --color-foreground-dark: var(--foreground-dark);
+  --color-subtle-light: var(--subtle-light);
+  --color-subtle-dark: var(--subtle-dark);
+  --color-border-light: var(--border-light);
+  --color-border-dark: var(--border-dark);
+  --color-primary: var(--primary);
+  
+  /* Cores de estado */
+  --color-success-light: var(--success-light);
+  --color-success-dark: var(--success-dark);
+  --color-warning-light: var(--warning-light);
+  --color-warning-dark: var(--warning-dark);
+  --color-info-light: var(--info-light);
+  --color-info-dark: var(--info-dark);
+  --color-danger-light: var(--danger-light);
+  --color-danger-dark: var(--danger-dark);
+  
+  /* Fontes */
+  --font-sans: var(--font-family);
+  
+  /* Border Radius */
+  --radius-default: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+}
+
+/* Aplica as cores base */
+body {
+  background: var(--background-light);
+  color: var(--foreground-light);
+  font-family: var(--font-family);
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--background-dark);
+    color: var(--foreground-dark);
+  }
+}
+
+/* Para controle manual via classe */
+.dark body {
+  background: var(--background-dark);
+  color: var(--foreground-dark);
+}
