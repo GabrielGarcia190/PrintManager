@@ -7,10 +7,8 @@ namespace PrintSpooler.Api.Controllers;
 [ApiController]
 public class PrintStatusController : ControllerBase
 {
-    //IMPLEMETAR PARA PEGAR SE O SPOOLER ESTÁ RODANDO
     [HttpGet("status")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
     public IActionResult Get()
         => Ok("Api is running");
 
@@ -23,18 +21,11 @@ public class PrintStatusController : ControllerBase
     }
 
     [HttpGet("get-spooler-status")]
+    [ProducesResponseType(200)]
     public IActionResult GetSpoolerStatus([FromServices] IPrinterService printJobService)
     {
         var result = printJobService.GetSpoolerStatus();
 
         return Ok(result);
-    }
-
-    [HttpGet("query-firestore")]
-    public async Task<IActionResult> GetFirestore([FromServices] IPrinterService printJobService)
-    {
-        var filesToPrint = await printJobService.GetFilesToPrint();
-
-        return Ok(filesToPrint);
     }
 }

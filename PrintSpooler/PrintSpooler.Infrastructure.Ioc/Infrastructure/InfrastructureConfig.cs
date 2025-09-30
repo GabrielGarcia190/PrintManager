@@ -1,5 +1,10 @@
+using CG.Web.MegaApiClient;
 using Microsoft.Extensions.DependencyInjection;
+using PrintSpooler.Domain.Files.Repositories;
+using PrintSpooler.Domain.Mega;
 using PrintSpooler.Domain.Printers.Repositories;
+using PrintSpooler.Infrastructure.Files;
+using PrintSpooler.Infrastructure.Mega;
 using PrintSpooler.Infrastructure.Printers;
 
 namespace PrintSpooler.Infrastructure.Ioc.Infrastructure;
@@ -11,5 +16,7 @@ internal static class InfrastructureConfig
         services.AddSingleton<DataAccess.FirestoreContext>();
 
         services.AddScoped<IPrinterRepository, PrinterRepository>();
+        services.AddScoped<IFilesToPrintRepository, FileToPrintRepository>();
+        services.AddScoped<IMegaRepository, MegaRepository>();
     }
 }

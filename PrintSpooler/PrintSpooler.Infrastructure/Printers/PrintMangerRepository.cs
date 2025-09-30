@@ -4,28 +4,12 @@ using PrintSpooler.Domain.Printers.Repositories;
 using System.ServiceProcess;
 using PrintSpooler.Infrastructure.DataAccess;
 using PrintSpooler.Domain.Files.Entities;
-using System.Linq;
-using System.Collections;
 
 namespace PrintSpooler.Infrastructure.Printers;
 
 public class PrinterRepository : IPrinterRepository
 {
-
-    private readonly FirestoreContext _context;
-
-    public PrinterRepository(FirestoreContext context)
-        => _context = context;
-
-    public async Task<IEnumerable<FileToPrint>> GetFilesToPrint()
-    {
-        var snapshot = await _context.Firestore.Collection("FilesToPrint").GetSnapshotAsync();
-
-        var files = snapshot.Documents.Select(x => x.ConvertTo<FileToPrint>());
-
-        return files;
-    }
-
+    
     [SupportedOSPlatform("windows")]
     public IEnumerable<string> GetInstalledPrinters()
     {
