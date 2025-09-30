@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrintSpooler.Application\PrintSpooler.Application.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Domain\PrintSpooler.Domain.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Infrastructure\PrintSpooler.Infrastructure.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Infrastructure.Ioc\PrintSpooler.Infrastructure.Ioc.csproj" />
+  </ItemGroup>
+
+</Project>

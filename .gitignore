@@ -1,1 +1,66 @@
-backend/Optima.API/.env
+# ==========================================
+# .NET
+# ==========================================
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+
+# Ignore arquivos de publish temporários
+.publish/
+*.Publish.xml
+
+# Pacotes
+*.nupkg
+*.snupkg
+*.nuspec
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# ==========================================
+# Node.js / Next.js / Electron
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-lock.yaml
+
+# Next.js
+.next/
+out/
+
+# Electron build
+dist/
+release/
+
+# Testes
+coverage/
+
+# Ambiente
+.env
+.env.*
+firebase-key.json
+
+# ==========================================
+# SO (Windows/macOS/Linux)
+# ==========================================
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+.env
+.env.*
+appsettings.Development.json
+appsettings.json
