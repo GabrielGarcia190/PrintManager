@@ -18,6 +18,7 @@
     <ProjectReference Include="..\PrintSpooler.Domain\PrintSpooler.Domain.csproj" />
     <ProjectReference Include="..\PrintSpooler.Infrastructure\PrintSpooler.Infrastructure.csproj" />
     <ProjectReference Include="..\PrintSpooler.Infrastructure.Ioc\PrintSpooler.Infrastructure.Ioc.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Worker\PrintSpooler.Worker.csproj" />
   </ItemGroup>
 
 </Project>

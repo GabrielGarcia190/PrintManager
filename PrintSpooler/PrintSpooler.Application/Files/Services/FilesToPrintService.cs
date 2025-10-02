@@ -6,9 +6,9 @@ namespace PrintSpooler.Application.Files.Services;
 
 public class FilesToPrintService : IFilesToPrintService
 {
-    private readonly IFilesToPrintRepository _printerRepository;
+    private readonly IFirestoreRepository _printerRepository;
 
-    public FilesToPrintService(IFilesToPrintRepository printerRepository)
+    public FilesToPrintService(IFirestoreRepository printerRepository)
      => _printerRepository = printerRepository;
 
     public async Task<IEnumerable<FileToPrint>> GetFilesToPrint()

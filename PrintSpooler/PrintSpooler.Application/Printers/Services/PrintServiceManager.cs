@@ -15,4 +15,7 @@ public class PrinterService : IPrinterService
 
     public string GetSpoolerStatus()
         => _printerRepository.GetSpoolerStatus();
+
+    public void PrintFile()
+        => _printerRepository.PrintFile(@"C:\dev\PrintManager\PrintSpooler\PrintSpooler.Api\DownloadedFiles\foto de perfil do zap.jpg", "Microsoft Print to PDF"); 
 }

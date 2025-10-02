@@ -28,4 +28,13 @@ public class PrintStatusController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpPost("print-document")]
+    [ProducesResponseType(200)]
+    public IActionResult Print([FromServices] IPrinterService printJobService)
+    {
+        printJobService.PrintFile();
+
+        return Ok();
+    }
 }

@@ -4,11 +4,11 @@ using PrintSpooler.Infrastructure.DataAccess;
 
 namespace PrintSpooler.Infrastructure.Files;
 
-public class FileToPrintRepository : IFilesToPrintRepository
+public class FirestoreRepository : IFirestoreRepository
 {
     private readonly FirestoreContext _context;
 
-    public FileToPrintRepository(FirestoreContext context)
+    public FirestoreRepository(FirestoreContext context)
         => _context = context;
 
     public async Task<IEnumerable<FileToPrint>> GetFilesToPrint()

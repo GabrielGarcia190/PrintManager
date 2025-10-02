@@ -10,18 +10,36 @@ public class MegaRepository : IMegaRepository
     public MegaRepository()
         => _megaApiClient = new MegaApiClient();
 
-    public async Task DownloadFile(string urlFile)
+    public async Task<string> DownloadFile(string urlFile)
     {
-        await Login();
+        try
+        {
+            await Login();
 
-        var uri = new Uri(urlFile);
-        var nodes = _megaApiClient.GetNodesFromLink(uri);
-        var node = nodes.Single(n => n.Type == NodeType.File);
+            var uri = new Uri(urlFile);
+            var node = await _megaApiClient.GetNodeFromLinkAsync(uri);
 
-        _megaApiClient.DownloadFile(node, Path.Combine(Environment.CurrentDirectory, "DonwloadedFiles"));
+            var filePath = Path.Combine(Environment.CurrentDirectory, "DownloadedFiles");
 
-        await Logout();
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+
+            await _megaApiClient.DownloadFileAsync(
+                      node,
+                      Path.Combine(filePath, node.Name)
+                  );
+
+            await Logout();
+
+            return Path.Combine(filePath, node.Name);
+        }
+        catch (Exception ex)
+        {
+           return $"An error occurred: {ex.Message}";
+        }
     }
+
+
 
     public async Task<string> UploadFile()
     {

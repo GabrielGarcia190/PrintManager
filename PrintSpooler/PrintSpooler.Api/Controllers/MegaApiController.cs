@@ -8,21 +8,11 @@ namespace PrintSpooler.Api.Controllers;
 [Route("api/mega")]
 public class MegaApiController : ControllerBase
 {
-    [HttpGet("teste")]
-    public async Task<IActionResult> Teste([FromServices] IMegaService printJobService)
+    [HttpGet("teste2")]
+    public async Task<IActionResult> Teste2([FromServices] IMegaService printJobService)
     {
-        var result = await printJobService.UploadFile();
+       await printJobService.DownloadFile(urlFile: "https://mega.nz/file/SjQViL6S#r3uVwmJbTsyyHuSHiuZCyOjijDCEOSn0VEjKRVuQFGs");
 
-        return Ok(result);
+        return Ok();
     }
-
-    // [HttpGet("teste2")]
-    // public IActionResult Teste2([FromServices] IMegaService printJobService)
-    // {
-    //     var result = printJobService.DownloadFile();
-
-    //     return Ok(result);
-    // }
-
-
 }

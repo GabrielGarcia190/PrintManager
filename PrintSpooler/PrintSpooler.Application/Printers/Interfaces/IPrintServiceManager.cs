@@ -6,4 +6,5 @@ public interface IPrinterService
 {
     IEnumerable<string> GetInstalledPrinters();
     string GetSpoolerStatus();
+    void PrintFile();
 }

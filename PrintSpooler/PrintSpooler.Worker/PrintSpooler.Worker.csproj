@@ -10,4 +10,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
+
+    <ItemGroup>
+    <ProjectReference Include="..\PrintSpooler.Application\PrintSpooler.Application.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Domain\PrintSpooler.Domain.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Infrastructure\PrintSpooler.Infrastructure.csproj" />
+    <ProjectReference Include="..\PrintSpooler.Infrastructure.Ioc\PrintSpooler.Infrastructure.Ioc.csproj" />
+  </ItemGroup>
 </Project>
