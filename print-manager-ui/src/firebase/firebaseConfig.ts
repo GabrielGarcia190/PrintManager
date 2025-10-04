@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-jJtuDPMEIxPuU6326nOmHUkboHyaudI",
-  authDomain: "printmanager-30145.firebaseapp.com",
-  projectId: "printmanager-30145",
-  storageBucket: "printmanager-30145.firebasestorage.app",
-  messagingSenderId: "931311919649",
-  appId: "1:931311919649:web:b925eb98651a0b6a327960",
-  measurementId: "G-PPLJ3GYWRZ"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 const app = initializeApp(firebaseConfig);
