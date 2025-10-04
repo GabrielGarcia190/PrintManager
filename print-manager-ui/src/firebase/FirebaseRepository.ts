@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { FileItem } from "@/app/Types/FileItem";
-import { db } from "./config";
+import { db } from "./firebaseConfig";
 
 export async function getFileQueue(): Promise<FileItem[]> {
   const querySnapshot = await getDocs(collection(db, "printJobs"));

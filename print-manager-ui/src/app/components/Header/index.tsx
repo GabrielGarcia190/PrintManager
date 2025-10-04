@@ -1,5 +1,5 @@
 "use client";
-import { db } from "@/firebase/config";
+import { db } from "@/firebase/firebaseConfig";
 import { getDocs, collection } from "firebase/firestore";
 import React from "react";
 

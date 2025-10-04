@@ -6,12 +6,12 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame: false,         
-    autoHideMenuBar: true,
-    titleBarStyle: 'hiddenInset',
+    // frame: false,         
+    // autoHideMenuBar: true,
+    // titleBarStyle: 'hiddenInset',
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
+      nodeIntegration: false,
+      contextIsolation: true
     }
   });
 

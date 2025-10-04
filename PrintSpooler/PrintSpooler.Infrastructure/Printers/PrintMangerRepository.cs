@@ -36,22 +36,29 @@ public class PrinterRepository : IPrinterRepository
     [SupportedOSPlatform("windows")]
     public void PrintFile(string filePath, string printerName)
     {
-        if (FIleIsImage(filePath))
+        try
         {
-            PrintImage(filePath, printerName);
+            if (FIleIsImage(filePath))
+            {
+                PrintImage(filePath, printerName);
 
-            return;
+                return;
+            }
+            var psi = new ProcessStartInfo
+            {
+                FileName = filePath,
+                Verb = "Print",
+                UseShellExecute = true,
+                CreateNoWindow = true,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            Process.Start(psi);
         }
-        var psi = new ProcessStartInfo
+        catch (Exception ex)
         {
-            FileName = filePath,
-            Verb = "Print",
-            UseShellExecute = true,
-            CreateNoWindow = true,
-            WindowStyle = ProcessWindowStyle.Hidden
-        };
-
-        Process.Start(psi);
+            throw new Exception(ex.Message);
+        }
     }
 
     private static readonly string[] imageExtensionsFile = [".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tiff"];

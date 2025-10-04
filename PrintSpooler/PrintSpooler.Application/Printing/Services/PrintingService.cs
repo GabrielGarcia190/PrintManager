@@ -2,6 +2,7 @@ using PrintSpooler.Application.Printing.Interfaces;
 using PrintSpooler.Domain.Files.Repositories;
 using PrintSpooler.Domain.Mega;
 using PrintSpooler.Domain.Printers.Repositories;
+using PrintSpooler.Domain.Shared.Results;
 
 namespace PrintSpooler.Application.Printing.Services;
 
@@ -18,13 +19,13 @@ public class PrintingService : IPrintingService
         _megaRepository = megaRepository;
     }
 
-    public async Task PrintAllFiles()
+    public async Task<ResponseData> PrintAllFiles()
     {
         try
         {
             var filesToPrint = await _filesToPrintRepository.GetFilesToPrint();
 
-            if (filesToPrint is null || !filesToPrint.Any()) return;
+            if (filesToPrint is null || !filesToPrint.Any()) return ResponseData.Sucesso("No files to print.");
 
             foreach (var file in filesToPrint)
             {
@@ -32,13 +33,14 @@ public class PrintingService : IPrintingService
 
                 var filePath = await _megaRepository.DownloadFile(file.FileUrl);
 
-               _printerRepository.PrintFile(filePath, file.PrinterName);
+                _printerRepository.PrintFile(filePath, file.PrinterName);
             }
-        }
-        catch (System.Exception)
-        {
 
-            Console.WriteLine("An error occurred while trying to print the files.");
+            return ResponseData.Sucesso("No files to print.");
+        }
+        catch (Exception ex)
+        {
+            return ResponseData.Sucesso($"An error occurred while trying to print the files. {ex.Message}");
         }
     }
 }

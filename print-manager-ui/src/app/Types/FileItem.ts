@@ -1,15 +1,19 @@
 import { Timestamp } from "firebase/firestore";
 
-export type FileStatus = "pending" | "printing" | "printed";
+export type FileStatus = "Pendente" | "Imprimindo" | "Impresso";
 
 export interface FileItem {
-  fileName: string;
-  user: string;
-  fileExtension: string;
-  fileUrl: string;
-  printerName: string;
+  id?: string;
+  nome: string;
+  usuario: string;
+  tamanho: string;
   status: FileStatus;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
-  errorMessage: string;
+  fileName?: string;
+  user?: string;
+  fileExtension?: string;
+  fileUrl?: string;
+  printerName?: string;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
+  errorMessage?: string;
 }
